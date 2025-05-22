@@ -19,7 +19,7 @@ services:
         condition: service_healthy
     ports:
       - "0.0.0.0:${NGINX_SSLPORT_HOST}:${NGINX_SSLPORT}"
-    
+      - "0.0.0.0:${NGINX_PORT_HOST}:${NGINX_PORT}"
   ckan:
     build:
       context: ckan/
