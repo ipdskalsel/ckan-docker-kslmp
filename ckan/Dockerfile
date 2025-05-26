@@ -13,7 +13,7 @@ RUN pip3 install -e 'git+https://github.com/ckan/ckanext-harvest.git@master#egg=
    pip3 install -r ${APP_DIR}/src/ckanext-harvest/pip-requirements.txt
 # will also require gather_consumer and fetch_consumer processes running (please see https://github.com/ckan/ckanext-harvest)
 RUN apt update && \
-   apt install -y cron
+   apt install -y cron supervisor
 COPY setup/ckan_harvesting.conf /etc/supervisor/conf.d/ckan_harvesting.conf
 RUN echo "*/30 * * * * ckan -c /etc/ckan/default/ckan.ini harvester run  >> /var/log/ckan/harvester_cron.log 2>&1" > /etc/cron.d/ckan_harvester_cron
 RUN chmod 0644 /etc/cron.d/ckan_harvester_cron
@@ -42,3 +42,5 @@ RUN for d in $APP_DIR/patches/*; do \
             done ; \
         fi ; \
     done
+
+USER root

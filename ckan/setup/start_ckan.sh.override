@@ -48,6 +48,8 @@ UWSGI_OPTS="--plugins http,python \
 
 if [ $? -eq 0 ]
 then
+    service supervisor start &
+
     # Start supervisord
     supervisord --configuration /etc/supervisord.conf &
     # Start uwsgi
