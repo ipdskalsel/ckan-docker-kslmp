@@ -48,10 +48,15 @@ UWSGI_OPTS="--plugins http,python \
 
 if [ $? -eq 0 ]
 then
-    service supervisor start &
+    echo "Starting Supervisor"
+    service supervisor start 
 
+    echo "Waiting Supervisor to start"
+    sleep 5
     # Start supervisord
-    supervisord --configuration /etc/supervisord.conf &
+    # supervisord --configuration /etc/supervisord.conf 
+
+    supervisorctl status
     # Start uwsgi
     sudo -u ckan -EH uwsgi $UWSGI_OPTS
 else

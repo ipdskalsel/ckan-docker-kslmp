@@ -8,6 +8,12 @@ if [[ $CKAN__PLUGINS == *"harvest ckan_harvester"* ]]; then
    exit 1
    }
 
+   echo "Starting Supervisor"
+   service supervisor start 
+
+   echo "Waiting Supervisor to start"
+   sleep 5
+
 else
    echo "INFO: Not configuring Harvester"
 fi
